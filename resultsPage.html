@@ -16,11 +16,13 @@
     .accordion-item.active .arrow {
       transform: rotate(90deg);
     }
-    .header h1 {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border: 2px solid #3b82f6;
-      border-radius: 0.375rem;
+    header.header {
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
     }
     .topics-info {
       margin: 1rem 0;
@@ -33,7 +35,7 @@
   </style>
 </head>
 <body>
-  <div class="header">
+  <div class="header-logo">
     <img src="interscope_logo.jpg" alt="InterScope Logo" />
   </div>
 
@@ -47,17 +49,19 @@
     </div>
   </div>
 
-  <header class="header">
-    <h1>Project Ideas</h1>
-  </header>
-
   <div class="container">
+    <header class="header">
+      <h1>Project Ideas</h1>
+    </header>
+
     <div class="topics-info">
       <p><strong>Topic 1:</strong> <span id="topic1">N/A</span></p>
       <p><strong>Topic 2:</strong> <span id="topic2">N/A</span></p>
       <p><strong>Timeframe:</strong> <span id="timeframe">N/A</span></p>
     </div>
+
     <div id="ideas-container" class="accordion"></div>
+
     <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
       <button id="back" class="regen-btn">Back</button>
       <button id="next" class="regen-btn">Next</button>
@@ -131,90 +135,88 @@
     const ideasPerPage = 10;
 
     function displayIdeas() {
-  const container = document.getElementById('ideas-container');
-  container.innerHTML = '';
+      const container = document.getElementById('ideas-container');
+      container.innerHTML = '';
 
-  const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
+      const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
 
-  if (slice.length === 0) {
-    container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
-    document.getElementById('next').style.display = 'none';
-    document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
-    return;
-  }
+      if (slice.length === 0) {
+        container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
+        document.getElementById('next').style.display = 'none';
+        document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
+        return;
+      }
 
-  slice.forEach((idea, index) => {
-    const item = document.createElement('div');
-    item.className = 'accordion-item';
+      slice.forEach((idea) => {
+        const item = document.createElement('div');
+        item.className = 'accordion-item';
 
-    const header = document.createElement('div');
-    header.className = 'accordion-header';
+        const header = document.createElement('div');
+        header.className = 'accordion-header';
 
-    const starButton = document.createElement('button');
-    starButton.innerHTML = '☆';  
-    starButton.style.fontSize = '1.5rem';
-    starButton.style.marginRight = '0.5rem';
-    starButton.style.background = 'none';
-    starButton.style.border = 'none';
-    starButton.style.cursor = 'pointer';
-    starButton.title = 'Add to Favorites';
+        const starButton = document.createElement('button');
+        starButton.innerHTML = '☆';
+        starButton.style.fontSize = '1.5rem';
+        starButton.style.marginRight = '0.5rem';
+        starButton.style.background = 'none';
+        starButton.style.border = 'none';
+        starButton.style.cursor = 'pointer';
+        starButton.title = 'Add to Favorites';
 
-    starButton.addEventListener('click', (e) => {
-      e.stopPropagation();
-      addToFavorites(idea);
-      starButton.innerHTML = '★'; 
-    });
+        starButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          addToFavorites(idea);
+          starButton.innerHTML = '★';
+        });
 
-    const titleSpan = document.createElement('span');
-    titleSpan.textContent = idea.title;
+        const titleSpan = document.createElement('span');
+        titleSpan.textContent = idea.title;
 
-    const arrowSpan = document.createElement('span');
-    arrowSpan.className = 'arrow';
-    arrowSpan.textContent = '▶';
+        const arrowSpan = document.createElement('span');
+        arrowSpan.className = 'arrow';
+        arrowSpan.textContent = '▶';
 
-    const buttonWrapper = document.createElement('button');
-    buttonWrapper.style.flex = '1';
-    buttonWrapper.style.textAlign = 'left';
-    buttonWrapper.style.background = 'none';
-    buttonWrapper.style.border = 'none';
-    buttonWrapper.style.cursor = 'pointer';
-    buttonWrapper.addEventListener('click', () => {
-      item.classList.toggle('active');
-    });
-    buttonWrapper.appendChild(titleSpan);
+        const buttonWrapper = document.createElement('button');
+        buttonWrapper.style.flex = '1';
+        buttonWrapper.style.textAlign = 'left';
+        buttonWrapper.style.background = 'none';
+        buttonWrapper.style.border = 'none';
+        buttonWrapper.style.cursor = 'pointer';
+        buttonWrapper.addEventListener('click', () => {
+          item.classList.toggle('active');
+        });
+        buttonWrapper.appendChild(titleSpan);
 
-    header.appendChild(starButton);
-    header.appendChild(buttonWrapper);
-    header.appendChild(arrowSpan);
+        header.appendChild(starButton);
+        header.appendChild(buttonWrapper);
+        header.appendChild(arrowSpan);
 
-    const body = document.createElement('div');
-    body.className = 'accordion-body';
-    body.innerHTML = `<div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
-                      <p style="font-size: 1.4rem;">${idea.description}</p>
-                      <p style="font-size: 1.2rem;"><strong>Hypothesis:</strong> ${idea.hypothesis}</p>
-                      <p style="font-size: 0.9rem;"><strong>Procedure:</strong> ${idea.procedure}</p>`;
+        const body = document.createElement('div');
+        body.className = 'accordion-body';
+        body.innerHTML = `<div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
+                          <p style="font-size: 1.4rem;">${idea.description}</p>
+                          <p style="font-size: 1.2rem;"><strong>Hypothesis:</strong> ${idea.hypothesis}</p>
+                          <p style="font-size: 0.9rem;"><strong>Procedure:</strong> ${idea.procedure}</p>`;
 
-    item.appendChild(header);
-    item.appendChild(body);
-    container.appendChild(item);
-  });
+        item.appendChild(header);
+        item.appendChild(body);
+        container.appendChild(item);
+      });
 
-  document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
-  document.getElementById('next').style.display = (currentIndex + ideasPerPage) >= ideas.length ? 'none' : 'inline-block';
-}
+      document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
+      document.getElementById('next').style.display = (currentIndex + ideasPerPage) >= ideas.length ? 'none' : 'inline-block';
+    }
 
     function addToFavorites(idea) {
-  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  
-  if (!favorites.some(fav => fav.title === idea.title)) {
-    favorites.push(idea);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    alert(`Added "${idea.title}" to Favorites!`);
-  } else {
-    alert(`"${idea.title}" is already in Favorites.`);
-  }
-}
-
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      if (!favorites.some(fav => fav.title === idea.title)) {
+        favorites.push(idea);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        alert(`Added "${idea.title}" to Favorites!`);
+      } else {
+        alert(`"${idea.title}" is already in Favorites.`);
+      }
+    }
 
     document.getElementById('back').addEventListener('click', () => {
       if (currentIndex - ideasPerPage >= 0) {

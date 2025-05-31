@@ -17,6 +17,7 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="topicSelection.html">Get Started</a>
+      <a href="login.html" id="auth-link">Log In</a>
     </div>
   </div>
 <div class="main-content">
@@ -56,15 +57,56 @@
 
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      // TODO: Handle login logic
+  
       alert("Logged in (placeholder)");
     });
 
     document.getElementById('signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      // TODO: Handle signup logic
+ 
       alert("Account created (placeholder)");
     });
+
+    <script>
+  let isLoggedIn = false; 
+
+  function updateAuthLink() {
+    const authLink = document.getElementById('auth-link');
+    if (isLoggedIn) {
+      authLink.textContent = 'Log Out';
+      authLink.onclick = function(e) {
+        e.preventDefault();
+        isLoggedIn = false;
+        alert('Logged out');
+        updateAuthLink();
+      };
+    } else {
+      authLink.textContent = 'Log In';
+      authLink.onclick = function(e) {
+        e.preventDefault();
+        switchForm('login');
+        window.scrollTo(0, document.body.scrollHeight); 
+      };
+    }
+  }
+
+  updateAuthLink();
+
+  document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    isLoggedIn = true;
+    alert("Logged in (placeholder)");
+    updateAuthLink();
+  });
+
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    isLoggedIn = true;
+    alert("Account created (placeholder)");
+    updateAuthLink();
+  });
+</script>
+
   </script>
 
 </body>

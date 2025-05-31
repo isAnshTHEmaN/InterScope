@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Results</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h2>Shared Research Keywords</h2>
+    <div class="keywords">
+      <span>Machine Learning</span>
+      <span>Data Analysis</span>
+      <span>Genomics</span>
+      <span>Bioinformatics</span>
+      <span>Deep Learning</span>
+    </div>
+
+    <h2>Example Research Ideas</h2>
+    <div class="accordion">
+      <div class="accordion-item active">
+        <button class="accordion-header">AI-Driven Genomic Analysis</button>
+        <div class="accordion-body">
+          This research idea explores the application of AI techniques to analyze genomic data, identify patterns, and predict outcomes related to disease, treatment response, and more.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header">Machine Learning in Bioinformatics</button>
+        <div class="accordion-body">[Details go here]</div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header">Deep Learning for Drug Discovery</button>
+        <div class="accordion-body">[Details go here]</div>
+      </div>
+    </div>
+
+    <button class="regen-btn">Re-Generate</button>
+  </main>
+
+  <script>
+    // Accordion behavior
+    document.querySelectorAll('.accordion-header').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

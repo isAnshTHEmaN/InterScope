@@ -23,8 +23,9 @@
   <main class="container">
     <h1>User Profile</h1>
     <div id="profile-info">
-      <p><strong>Name:</strong> <span id="user-name">Guest</span></p>
+      <p><strong>Full Name:</strong> <span id="user-fullname">Guest</span></p>
       <p><strong>Email:</strong> <span id="user-email">N/A</span></p>
+      <p><strong>Password:</strong> <span id="user-password">N/A</span></p>
     </div>
   </main>
 
@@ -65,8 +66,13 @@
     updateAuthLink();
 
     if (isLoggedIn) {
-      document.getElementById('user-name').textContent = "John Doe";
-      document.getElementById('user-email').textContent = "john.doe@example.com";
+      const fullName = localStorage.getItem('userFullName') || 'Guest';
+      const email = localStorage.getItem('userEmail') || 'N/A';
+      const password = localStorage.getItem('userPassword') || 'N/A';
+
+      document.getElementById('user-fullname').textContent = fullName;
+      document.getElementById('user-email').textContent = email;
+      document.getElementById('user-password').textContent = password;
     }
   </script>
 </body>

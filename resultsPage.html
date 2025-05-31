@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>InterScope - Results</title>
+    <title>Project Ideas Display</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .accordion-header {
@@ -21,7 +21,18 @@
             padding: 0.5rem 1rem;
             border: 2px solid #3b82f6;
             border-radius: 0.375rem;
+        }
+        .topics-info {
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: #1a1a1a;
+            border: 1px solid #3b82f6;
+            border-radius: 0.375rem;
+            color: #8ab4f8;
+        }
     </style>
+</head>
+<body>
     <div class="header">
     <img src="interscope_logo.jpg" alt="InterScope Logo">
   </div>
@@ -32,14 +43,16 @@
       <a href="topicSelection.html">Get Started</a>
     </div>
   </div>
-</head>
-<body>
-    
     <header class="header">
         <h1>Project Ideas</h1>
     </header>
 
     <div class="container">
+        <div class="topics-info">
+            <p><strong>Topic 1:</strong> <span id="topic1">N/A</span></p>
+            <p><strong>Topic 2:</strong> <span id="topic2">N/A</span></p>
+            <p><strong>Timeframe:</strong> <span id="timeframe">N/A</span></p>
+        </div>
         <div id="ideas-container" class="accordion"></div>
         <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
             <button id="back" class="regen-btn">Back</button>
@@ -48,6 +61,14 @@
     </div>
 
     <script>
+        const topic1 = localStorage.getItem('topic1') || 'N/A';
+        const topic2 = localStorage.getItem('topic2') || 'N/A';
+        const timeframe = localStorage.getItem('timeframe') || 'N/A';
+
+        document.getElementById('topic1').textContent = topic1;
+        document.getElementById('topic2').textContent = topic2;
+        document.getElementById('timeframe').textContent = timeframe;
+
         const ideas = [
             {
                 title: "Engineering Artificial Mycorrhizal Networks for Sustainable Agriculture",
@@ -74,6 +95,12 @@
             
             const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
             
+            if (slice.length === 0) {
+                container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
+                document.getElementById('next').style.display = 'none';
+                document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
+                return;
+            }
 
             slice.forEach((idea) => {
                 const item = document.createElement('div');

@@ -24,7 +24,7 @@ nav, .navbar-container {
 
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 

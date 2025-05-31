@@ -119,7 +119,7 @@
       const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
 
       if (slice.length === 0) {
-        container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
+        container.innerHTML = "<p>We couldn't find much, try searching for something new.</p>";
         document.getElementById('next').style.display = 'none';
         document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
         return;

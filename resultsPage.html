@@ -108,113 +108,95 @@
     document.getElementById('topic2').textContent = topic2;
     document.getElementById('timeframe').textContent = timeframe;
 
-    const ideas = [
-      {
-        title: "Engineering Artificial Mycorrhizal Networks for Sustainable Agriculture",
-        description: "This project proposes the design and fabrication of artificial mycorrhizal networks—biocompatible polymer‐based nanofiber meshes that emulate the nutrient and water transport functions of fungal hyphae—to enhance plant resilience under drought and low‐fertility conditions.",
-        keyword1: "artificial",
-        keyword2: "sustainable",
-        hypothesis: "Artificial networks mimicking mycorrhizal structures can improve water and nutrient uptake in crop roots, reducing fertilizer and irrigation needs and promoting sustainable yields in marginal soils.",
-        procedure: "1. Material Synthesis: Develop electrospun nanofiber mats from biodegradable polymers (e.g., polylactic acid, chitosan) functionalized with phosphatase and aquaporin‐like proteins. 2. Network Assembly: Pattern fibers into branching architectures using 3D printing to approximate fungal hyphal networks. 3. Greenhouse Trials: Embed artificial networks alongside seedling roots of model crops (e.g., wheat, maize) in controlled soil microcosms under varied moisture and nutrient regimes. 4. Tracer Studies: Use isotopically labeled phosphorus and deuterated water to quantify transport rates through artificial versus native mycorrhizal networks. 5. Imaging & Analysis: Employ confocal microscopy and X‐ray tomography to visualize root–network interfacing; measure plant biomass, water‐use efficiency, and soil nutrient depletion over growth cycles. 6. Life‐Cycle Assessment: Evaluate biodegradation and ecological impact of network materials in field soil samples over six months post‐harvest."
-      },
-      {
-        title: "Swarm Intelligence–Driven Drone Reforestation for Environmental Restoration",
-        description: "This research aims to apply swarm intelligence algorithms to coordinated fleets of autonomous aerial drones for targeted seed dispersal and real‐time environmental monitoring in deforested or degraded landscapes.",
-        keyword1: "intelligence",
-        keyword2: "environmental",
-        hypothesis: "Drones guided by bioinspired swarm intelligence will achieve higher reforestation success rates and more efficient monitoring of environmental variables than single‐agent or centrally controlled systems.",
-        procedure: "1. Algorithm Development: Design and implement decentralized swarm behaviors (e.g., pheromone‐inspired virtual markers, leader‐follower dynamics) enabling drones to self‐organize, avoid collisions, and allocate seeding tasks adaptively. 2. Sensor Integration: Equip each drone with multispectral cameras, LiDAR, and soil‐moisture probes for on‐the‐fly assessment of vegetation canopy, topography, and soil conditions. 3. Simulation Testing: Validate swarm algorithms in virtual environments (e.g., Gazebo, ROS) with digital twins of target terrains, optimizing parameters for seed drop precision and coverage. 4. Field Deployment: Conduct pilot trials in a 1‐hectare deforested site, releasing swarms of 20–30 drones programmed to identify optimal planting zones, deposit biodegradable seed capsules, and map emergent sapling growth. 5. Monitoring & Evaluation: Use repeat drone flights and ground surveys over 12 months to assess seed germination rates, biomass accumulation, species diversity, and soil quality improvements. 6. Comparative Analysis: Benchmark performance metrics (area replanted per flight hour, survival rates, energy consumption) against traditional manual planting and centrally controlled drone experiments."
-      }
-    ];
-
+    let ideas = [];
     let currentIndex = 0;
     const ideasPerPage = 10;
 
     function displayIdeas() {
-  const container = document.getElementById('ideas-container');
-  container.innerHTML = '';
+      const container = document.getElementById('ideas-container');
+      container.innerHTML = '';
 
-  const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
+      const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
 
-  if (slice.length === 0) {
-    container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
-    document.getElementById('next').style.display = 'none';
-    document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
-    return;
-  }
+      if (slice.length === 0) {
+        container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
+        document.getElementById('next').style.display = 'none';
+        document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
+        return;
+      }
 
-  slice.forEach((idea, index) => {
-    const item = document.createElement('div');
-    item.className = 'accordion-item';
+      slice.forEach((idea) => {
+        const item = document.createElement('div');
+        item.className = 'accordion-item';
 
-    const header = document.createElement('div');
-    header.className = 'accordion-header';
+        const header = document.createElement('div');
+        header.className = 'accordion-header';
 
-    const starButton = document.createElement('button');
-    starButton.innerHTML = '☆';  
-    starButton.style.fontSize = '1.5rem';
-    starButton.style.marginRight = '0.5rem';
-    starButton.style.background = 'none';
-    starButton.style.border = 'none';
-    starButton.style.cursor = 'pointer';
-    starButton.title = 'Add to Favorites';
+        const starButton = document.createElement('button');
+        starButton.innerHTML = '☆';
+        starButton.style.fontSize = '1.5rem';
+        starButton.style.marginRight = '0.5rem';
+        starButton.style.background = 'none';
+        starButton.style.border = 'none';
+        starButton.style.cursor = 'pointer';
+        starButton.title = 'Add to Favorites';
 
-    starButton.addEventListener('click', (e) => {
-      e.stopPropagation();
-      addToFavorites(idea);
-      starButton.innerHTML = '★'; 
-    });
+        starButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          addToFavorites(idea);
+          starButton.innerHTML = '★';
+        });
 
-    const titleSpan = document.createElement('span');
-    titleSpan.textContent = idea.title;
+        const titleSpan = document.createElement('span');
+        titleSpan.textContent = idea.title;
 
-    const arrowSpan = document.createElement('span');
-    arrowSpan.className = 'arrow';
-    arrowSpan.textContent = '▶';
+        const arrowSpan = document.createElement('span');
+        arrowSpan.className = 'arrow';
+        arrowSpan.textContent = '▶';
 
-    const buttonWrapper = document.createElement('button');
-    buttonWrapper.style.flex = '1';
-    buttonWrapper.style.textAlign = 'left';
-    buttonWrapper.style.background = 'none';
-    buttonWrapper.style.border = 'none';
-    buttonWrapper.style.cursor = 'pointer';
-    buttonWrapper.addEventListener('click', () => {
-      item.classList.toggle('active');
-    });
-    buttonWrapper.appendChild(titleSpan);
+        const buttonWrapper = document.createElement('button');
+        buttonWrapper.style.flex = '1';
+        buttonWrapper.style.textAlign = 'left';
+        buttonWrapper.style.background = 'none';
+        buttonWrapper.style.border = 'none';
+        buttonWrapper.style.cursor = 'pointer';
+        buttonWrapper.addEventListener('click', () => {
+          item.classList.toggle('active');
+        });
+        buttonWrapper.appendChild(titleSpan);
 
-    header.appendChild(starButton);
-    header.appendChild(buttonWrapper);
-    header.appendChild(arrowSpan);
+        header.appendChild(starButton);
+        header.appendChild(buttonWrapper);
+        header.appendChild(arrowSpan);
 
-    const body = document.createElement('div');
-    body.className = 'accordion-body';
-    body.innerHTML = `<div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
-                      <p style="font-size: 1.4rem;">${idea.description}</p>
-                      <p style="font-size: 1.2rem;"><strong>Hypothesis:</strong> ${idea.hypothesis}</p>
-                      <p style="font-size: 0.9rem;"><strong>Procedure:</strong> ${idea.procedure}</p>`;
+        const body = document.createElement('div');
+        body.className = 'accordion-body';
+        body.innerHTML = `
+          <div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
+          <p style="font-size: 1.4rem;">${idea.description}</p>
+          <p style="font-size: 1.2rem;"><strong>Hypothesis:</strong> ${idea.hypothesis}</p>
+          <p style="font-size: 0.9rem;"><strong>Procedure:</strong> ${idea.procedure}</p>`;
 
-    item.appendChild(header);
-    item.appendChild(body);
-    container.appendChild(item);
-  });
+        item.appendChild(header);
+        item.appendChild(body);
+        container.appendChild(item);
+      });
 
-  document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
-  document.getElementById('next').style.display = (currentIndex + ideasPerPage) >= ideas.length ? 'none' : 'inline-block';
-}
+      document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
+      document.getElementById('next').style.display = (currentIndex + ideasPerPage) >= ideas.length ? 'none' : 'inline-block';
+    }
 
     function addToFavorites(idea) {
-  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  
-  if (!favorites.some(fav => fav.title === idea.title)) {
-    favorites.push(idea);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    alert(`Added "${idea.title}" to Favorites!`);
-  } else {
-    alert(`"${idea.title}" is already in Favorites.`);
-  }
-}
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
+      if (!favorites.some(fav => fav.title === idea.title)) {
+        favorites.push(idea);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        alert(`Added "${idea.title}" to Favorites!`);
+      } else {
+        alert(`"${idea.title}" is already in Favorites.`);
+      }
+    }
 
     document.getElementById('back').addEventListener('click', () => {
       if (currentIndex - ideasPerPage >= 0) {
@@ -230,7 +212,50 @@
       }
     });
 
-    displayIdeas();
+    async function fetchIdeas() {
+      if (topic1 === 'N/A' || topic2 === 'N/A' || timeframe === 'N/A') {
+        ideas = [];
+        displayIdeas();
+        return;
+      }
+
+      try {
+        const response = await fetch('http://104.198.68.208:8080/generateIdeas', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            topicOne: topic1,
+            topicTwo: topic2,
+            timeFrame: timeframe
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.ideas && Array.isArray(data.ideas)) {
+          ideas = data.ideas;
+        } else {
+          console.error('Unexpected response format:', data);
+          ideas = [];
+        }
+
+        currentIndex = 0;
+        displayIdeas();
+
+      } catch (error) {
+        console.error('Error fetching ideas:', error);
+        ideas = [];
+        displayIdeas();
+      }
+    }
+
+    fetchIdeas();
   </script>
 </body>
 </html>

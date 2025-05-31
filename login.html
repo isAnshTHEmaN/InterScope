@@ -70,25 +70,19 @@
     <script>
   let isLoggedIn = false; 
 
-  function updateAuthLink() {
-    const authLink = document.getElementById('auth-link');
+ function updateAuthLink() {
+  const authLink = document.getElementById('auth-link');
+  authLink.onclick = function(e) {
+    e.preventDefault();
     if (isLoggedIn) {
-      authLink.textContent = 'Log Out';
-      authLink.onclick = function(e) {
-        e.preventDefault();
-        isLoggedIn = false;
-        alert('Logged out');
-        updateAuthLink();
-      };
+      isLoggedIn = false;
+      alert('Logged out');
+      updateAuthLink();
     } else {
-      authLink.textContent = 'Log In';
-      authLink.onclick = function(e) {
-        e.preventDefault();
-        switchForm('login');
-        window.scrollTo(0, document.body.scrollHeight); 
-      };
+      switchForm('login');
+      window.scrollTo(0, document.body.scrollHeight);
     }
-  }
+  };
 
   updateAuthLink();
 

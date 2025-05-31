@@ -22,19 +22,19 @@ header, .header {
 
 nav, .navbar-container {
     background-color: #000000;
-    padding: 10px 0;
+    padding: 20px 0;
 }
 
 .navigation {
     display: flex;
     justify-content: center;
-    gap: 30px; 
+    gap: 60px; 
 }
 
 .navigation a {
     color: #8ab4f8;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 32px;
     position: relative;
     transition: color 0.3s ease;
 }

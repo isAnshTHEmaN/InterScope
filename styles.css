@@ -207,14 +207,21 @@ nav, .navbar-container {
 }
 
 .accordion-header {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   background-color: #000000;
   border: none;
   padding: 1rem;
-  text-align: left;
   font-weight: bold;
   color: #8ab4f8;
   cursor: pointer;
+}
+
+.accordion-header .arrow {
+  margin-left: 0.5rem;
+  color: #8ab4f8;
+  transition: transform 0.3s ease;
 }
 
 .accordion-header span,

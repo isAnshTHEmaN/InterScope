@@ -1,147 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>InterScope - Results</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .accordion-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .arrow {
-            transition: transform 0.3s ease;
-        }
-        .accordion-item.active .arrow {
-            transform: rotate(90deg);
-        }
-        .header h1 {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border: 2px solid #3b82f6;
-            border-radius: 0.375rem;
-        }
-        .topics-info {
-            margin: 1rem 0;
-            padding: 1rem;
-            background-color: #1a1a1a;
-            border: 1px solid #3b82f6;
-            border-radius: 0.375rem;
-            color: #8ab4f8;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>InterScope - Results</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .arrow {
+      transition: transform 0.3s ease;
+    }
+    .accordion-item.active .arrow {
+      transform: rotate(90deg);
+    }
+    .header h1 {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 2px solid #3b82f6;
+      border-radius: 0.375rem;
+    }
+    .topics-info {
+      margin: 1rem 0;
+      padding: 1rem;
+      background-color: #1a1a1a;
+      border: 1px solid #3b82f6;
+      border-radius: 0.375rem;
+      color: #8ab4f8;
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-    <img src="interscope_logo.jpg" alt="InterScope Logo">
+  <div class="header">
+    <img src="interscope_logo.jpg" alt="InterScope Logo" />
   </div>
+
   <div class="navbar-container">
     <div class="navigation">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="topicSelection.html">Get Started</a>
+      <a href="profile-page.html" id="profile-link" style="display: none;">Profile</a>
+      <a href="#" id="auth-link">Log In</a>
     </div>
   </div>
-    <header class="header">
-        <h1>Project Ideas</h1>
-    </header>
 
-    <div class="container">
-        <div class="topics-info">
-            <p><strong>Topic 1:</strong> <span id="topic1">N/A</span></p>
-            <p><strong>Topic 2:</strong> <span id="topic2">N/A</span></p>
-            <p><strong>Timeframe:</strong> <span id="timeframe">N/A</span></p>
-        </div>
-        <div id="ideas-container" class="accordion"></div>
-        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-            <button id="back" class="regen-btn">Back</button>
-            <button id="next" class="regen-btn">Next</button>
-        </div>
+  <header class="header">
+    <h1>Project Ideas</h1>
+  </header>
+
+  <div class="container">
+    <div class="topics-info">
+      <p><strong>Topic 1:</strong> <span id="topic1">N/A</span></p>
+      <p><strong>Topic 2:</strong> <span id="topic2">N/A</span></p>
+      <p><strong>Timeframe:</strong> <span id="timeframe">N/A</span></p>
     </div>
+    <div id="ideas-container" class="accordion"></div>
+    <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+      <button id="back" class="regen-btn">Back</button>
+      <button id="next" class="regen-btn">Next</button>
+    </div>
+  </div>
 
-    <script>
-        const topic1 = localStorage.getItem('topic1') || 'N/A';
-        const topic2 = localStorage.getItem('topic2') || 'N/A';
-        const timeframe = localStorage.getItem('timeframe') || 'N/A';
+  <script>
+    const STORAGE_KEY = 'interscope_isLoggedIn';
 
-        document.getElementById('topic1').textContent = topic1;
-        document.getElementById('topic2').textContent = topic2;
-        document.getElementById('timeframe').textContent = timeframe;
+    function getLoginState() {
+      return localStorage.getItem(STORAGE_KEY) === 'true';
+    }
 
-        const ideas = [
-            {
-                title: "Engineering Artificial Mycorrhizal Networks for Sustainable Agriculture",
-                description: "This project proposes the design and fabrication of artificial mycorrhizal networks—biocompatible polymer‐based nanofiber meshes that emulate the nutrient and water transport functions of fungal hyphae—to enhance plant resilience under drought and low‐fertility conditions.",
-                keyword1: "artificial",
-                keyword2: "sustainable",
-                hypothesis: "Artificial networks mimicking mycorrhizal structures can improve water and nutrient uptake in crop roots, reducing fertilizer and irrigation needs and promoting sustainable yields in marginal soils.",
-                procedure: "1. Material Synthesis: Develop electrospun nanofiber mats from biodegradable polymers (e.g., polylactic acid, chitosan) functionalized with phosphatase and aquaporin‐like proteins. 2. Network Assembly: Pattern fibers into branching architectures using 3D printing to approximate fungal hyphal networks. 3. Greenhouse Trials: Embed artificial networks alongside seedling roots of model crops (e.g., wheat, maize) in controlled soil microcosms under varied moisture and nutrient regimes. 4. Tracer Studies: Use isotopically labeled phosphorus and deuterated water to quantify transport rates through artificial versus native mycorrhizal networks. 5. Imaging & Analysis: Employ confocal microscopy and X‐ray tomography to visualize root–network interfacing; measure plant biomass, water‐use efficiency, and soil nutrient depletion over growth cycles. 6. Life‐Cycle Assessment: Evaluate biodegradation and ecological impact of network materials in field soil samples over six months post‐harvest."
-            },
-            {
-                title: "Swarm Intelligence–Driven Drone Reforestation for Environmental Restoration",
-                description: "This research aims to apply swarm intelligence algorithms to coordinated fleets of autonomous aerial drones for targeted seed dispersal and real‐time environmental monitoring in deforested or degraded landscapes.",
-                keyword1: "intelligence",
-                keyword2: "environmental",
-                hypothesis: "Drones guided by bioinspired swarm intelligence will achieve higher reforestation success rates and more efficient monitoring of environmental variables than single‐agent or centrally controlled systems.",
-                procedure: "1. Algorithm Development: Design and implement decentralized swarm behaviors (e.g., pheromone‐inspired virtual markers, leader‐follower dynamics) enabling drones to self‐organize, avoid collisions, and allocate seeding tasks adaptively. 2. Sensor Integration: Equip each drone with multispectral cameras, LiDAR, and soil‐moisture probes for on‐the‐fly assessment of vegetation canopy, topography, and soil conditions. 3. Simulation Testing: Validate swarm algorithms in virtual environments (e.g., Gazebo, ROS) with digital twins of target terrains, optimizing parameters for seed drop precision and coverage. 4. Field Deployment: Conduct pilot trials in a 1‐hectare deforested site, releasing swarms of 20–30 drones programmed to identify optimal planting zones, deposit biodegradable seed capsules, and map emergent sapling growth. 5. Monitoring & Evaluation: Use repeat drone flights and ground surveys over 12 months to assess seed germination rates, biomass accumulation, species diversity, and soil quality improvements. 6. Comparative Analysis: Benchmark performance metrics (area replanted per flight hour, survival rates, energy consumption) against traditional manual planting and centrally controlled drone experiments."
-            }
-        ];
+    function setLoginState(state) {
+      localStorage.setItem(STORAGE_KEY, state);
+    }
 
-        let currentIndex = 0;
-        const ideasPerPage = 10;
+    let isLoggedIn = getLoginState();
 
-        function displayIdeas() {
-            const container = document.getElementById('ideas-container');
-            container.innerHTML = '';
-            
-            const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
-            
-            if (slice.length === 0) {
-                container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
-                document.getElementById('next').style.display = 'none';
-                document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
-                return;
-            }
+    function updateAuthLink() {
+      const authLink = document.getElementById('auth-link');
+      const profileLink = document.getElementById('profile-link');
 
-            slice.forEach((idea) => {
-                const item = document.createElement('div');
-                item.className = 'accordion-item';
+      authLink.textContent = isLoggedIn ? 'Log Out' : 'Log In';
+      profileLink.style.display = isLoggedIn ? 'inline' : 'none';
 
-                const header = document.createElement('button');
-                header.className = 'accordion-header';
-                header.innerHTML = `<span>${idea.title}</span><span class="arrow">▶</span>`;
-                header.addEventListener('click', () => {
-                    item.classList.toggle('active');
-                });
-
-                const body = document.createElement('div');
-                body.className = 'accordion-body';
-                body.innerHTML = `<div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
-                                 <p style="font-size: 1.4rem;">${idea.description}</p>
-                                 <p style="font-size: 1.2rem;"><strong>Hypothesis:</strong> ${idea.hypothesis}</p>
-                                 <p style="font-size: 0.9rem;"><strong>Procedure:</strong> ${idea.procedure}</p>`;
-
-                item.appendChild(header);
-                item.appendChild(body);
-                container.appendChild(item);
-            });
-
-            document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
-            document.getElementById('next').style.display = (currentIndex + ideasPerPage) >= ideas.length ? 'none' : 'inline-block';
+      authLink.onclick = function(e) {
+        e.preventDefault();
+        if (isLoggedIn) {
+          isLoggedIn = false;
+          setLoginState(false);
+          alert('Logged out');
+          updateAuthLink();
+          window.location.href = "login.html";
+        } else {
+          window.location.href = "login.html";
         }
+      };
+    }
 
-        document.getElementById('next').addEventListener('click', () => {
-            currentIndex += ideasPerPage;
-            displayIdeas();
+    updateAuthLink();
+
+    const topic1 = localStorage.getItem('topic1') || 'N/A';
+    const topic2 = localStorage.getItem('topic2') || 'N/A';
+    const timeframe = localStorage.getItem('timeframe') || 'N/A';
+
+    document.getElementById('topic1').textContent = topic1;
+    document.getElementById('topic2').textContent = topic2;
+    document.getElementById('timeframe').textContent = timeframe;
+
+    const ideas = [
+      {
+        title: "Engineering Artificial Mycorrhizal Networks for Sustainable Agriculture",
+        description: "This project proposes the design and fabrication of artificial mycorrhizal networks—biocompatible polymer‐based nanofiber meshes that emulate the nutrient and water transport functions of fungal hyphae—to enhance plant resilience under drought and low‐fertility conditions.",
+        keyword1: "artificial",
+        keyword2: "sustainable",
+        hypothesis: "Artificial networks mimicking mycorrhizal structures can improve water and nutrient uptake in crop roots, reducing fertilizer and irrigation needs and promoting sustainable yields in marginal soils.",
+        procedure: "1. Material Synthesis: Develop electrospun nanofiber mats from biodegradable polymers (e.g., polylactic acid, chitosan) functionalized with phosphatase and aquaporin‐like proteins. 2. Network Assembly: Pattern fibers into branching architectures using 3D printing to approximate fungal hyphal networks. 3. Greenhouse Trials: Embed artificial networks alongside seedling roots of model crops (e.g., wheat, maize) in controlled soil microcosms under varied moisture and nutrient regimes. 4. Tracer Studies: Use isotopically labeled phosphorus and deuterated water to quantify transport rates through artificial versus native mycorrhizal networks. 5. Imaging & Analysis: Employ confocal microscopy and X‐ray tomography to visualize root–network interfacing; measure plant biomass, water‐use efficiency, and soil nutrient depletion over growth cycles. 6. Life‐Cycle Assessment: Evaluate biodegradation and ecological impact of network materials in field soil samples over six months post‐harvest."
+      },
+      {
+        title: "Swarm Intelligence–Driven Drone Reforestation for Environmental Restoration",
+        description: "This research aims to apply swarm intelligence algorithms to coordinated fleets of autonomous aerial drones for targeted seed dispersal and real‐time environmental monitoring in deforested or degraded landscapes.",
+        keyword1: "intelligence",
+        keyword2: "environmental",
+        hypothesis: "Drones guided by bioinspired swarm intelligence will achieve higher reforestation success rates and more efficient monitoring of environmental variables than single‐agent or centrally controlled systems.",
+        procedure: "1. Algorithm Development: Design and implement decentralized swarm behaviors (e.g., pheromone‐inspired virtual markers, leader‐follower dynamics) enabling drones to self‐organize, avoid collisions, and allocate seeding tasks adaptively. 2. Sensor Integration: Equip each drone with multispectral cameras, LiDAR, and soil‐moisture probes for on‐the‐fly assessment of vegetation canopy, topography, and soil conditions. 3. Simulation Testing: Validate swarm algorithms in virtual environments (e.g., Gazebo, ROS) with digital twins of target terrains, optimizing parameters for seed drop precision and coverage. 4. Field Deployment: Conduct pilot trials in a 1‐hectare deforested site, releasing swarms of 20–30 drones programmed to identify optimal planting zones, deposit biodegradable seed capsules, and map emergent sapling growth. 5. Monitoring & Evaluation: Use repeat drone flights and ground surveys over 12 months to assess seed germination rates, biomass accumulation, species diversity, and soil quality improvements. 6. Comparative Analysis: Benchmark performance metrics (area replanted per flight hour, survival rates, energy consumption) against traditional manual planting and centrally controlled drone experiments."
+      }
+    ];
+
+    let currentIndex = 0;
+    const ideasPerPage = 10;
+
+    function displayIdeas() {
+      const container = document.getElementById('ideas-container');
+      container.innerHTML = '';
+
+      const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
+
+      if (slice.length === 0) {
+        container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
+        document.getElementById('next').style.display = 'none';
+        document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
+        return;
+      }
+
+      slice.forEach((idea) => {
+        const item = document.createElement('div');
+        item.className = 'accordion-item';
+
+        const header = document.createElement('button');
+        header.className = 'accordion-header';
+        header.innerHTML = `<span>${idea.title}</span><span class="arrow">▶</span>`;
+        header.addEventListener('click', () => {
+          item.classList.toggle('active');
         });
 
-        document.getElementById('back').addEventListener('click', () => {
-            currentIndex = Math.max(0, currentIndex - ideasPerPage);
-            displayIdeas();
-        });
+        const body = document.createElement('div');
+        body.className = 'accordion-body';
+        body.innerHTML = `<div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
+                         <p style="font-size: 1.4rem;">${idea.description}</p>
+                         <p style="font-size: 1.2rem;"><strong>Hypothesis:</strong> ${idea.hypothesis}</p>
+                         <p style="font-size: 0.9rem;"><strong>Procedure:</strong> ${idea.procedure}</p>`;
 
-        displayIdeas();
-    </script>
-</body>
-</html>
+        item.appendChild(header);
+        item.appendChild(body);
+        container.appendChild(item);
+      });
+
+      document.getElementById('back').style.display = currentIndex === 0

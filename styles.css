@@ -1,8 +1,9 @@
 body {
   font-family: 'Nunito Sans Bold', Lato, sans-serif;
   margin: 0;
-  background-color: #000000;
-  color: #8ab4f8; 
+  background: url('background.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #8ab4f8;
 }
 
 header, .header {

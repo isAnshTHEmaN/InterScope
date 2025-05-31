@@ -203,6 +203,19 @@
   document.getElementById('next').style.display = (currentIndex + ideasPerPage) >= ideas.length ? 'none' : 'inline-block';
 }
 
+    function addToFavorites(idea) {
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  
+  if (!favorites.some(fav => fav.title === idea.title)) {
+    favorites.push(idea);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    alert(`Added "${idea.title}" to Favorites!`);
+  } else {
+    alert(`"${idea.title}" is already in Favorites.`);
+  }
+}
+
+
     document.getElementById('back').addEventListener('click', () => {
       if (currentIndex - ideasPerPage >= 0) {
         currentIndex -= ideasPerPage;

@@ -17,6 +17,7 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="topicSelection.html">Get Started</a>
+      <a href="#" id="profile-link" style="display: none;">Profile</a>
       <a href="#" id="auth-link">Log In</a>
     </div>
   </div>
@@ -60,7 +61,11 @@
 
     function updateAuthLink() {
       const authLink = document.getElementById('auth-link');
+      const profileLink = document.getElementById('profile-link');
+
       authLink.textContent = isLoggedIn ? 'Log Out' : 'Log In';
+      profileLink.style.display = isLoggedIn ? 'inline' : 'none';
+
       authLink.onclick = function(e) {
         e.preventDefault();
         if (isLoggedIn) {
@@ -79,14 +84,14 @@
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
       isLoggedIn = true;
-      alert("Logged in");
+      alert("Logged in (placeholder)");
       updateAuthLink();
     });
 
     document.getElementById('signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
       isLoggedIn = true;
-      alert("Account created");
+      alert("Account created (placeholder)");
       updateAuthLink();
     });
   </script>

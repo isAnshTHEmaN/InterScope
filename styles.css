@@ -257,3 +257,31 @@ nav, .navbar-container {
   width: 100%;
   flex-direction: column;
 }
+
+/* Profile Page */
+
+.profile-container {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-container h1 {
+  margin-bottom: 1.5rem;
+  color: #3b82f6;;
+  font-size: 2rem;
+}
+
+.profile-info {
+  font-size: 1.1rem;
+  color: #3b82f6;;
+}
+
+.profile-info p {
+  margin: 0.75rem 0;
+}
+

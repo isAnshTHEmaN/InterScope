@@ -8,6 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Six+Caps&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <script>
+         function startButton(event) {
+            event.preventDefault();
+            window.location.href = "topicSelection.html";
+        }
+    </script>
 </head>
 <body>
   <div class="header">
@@ -21,4 +28,6 @@
     </div>
   </div>
   <div class="description-text">
+      <h3>InterScope: your favorite research assistant.</h3>
+      <button onclick="startButton(event)" type="button" class="custom-submit">Begin</button>
 </body>

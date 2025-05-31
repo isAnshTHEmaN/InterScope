@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InterScope - Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InterScope - Profile</title>
   <link rel="stylesheet" href="styles.css" />
- 
+</head>
+<body>
+
   <div class="header">
     <img src="interscope_logo.jpg" alt="InterScope Logo">
   </div>
+
   <div class="navbar-container">
     <div class="navigation">
       <a href="index.html">Home</a>
@@ -16,40 +19,22 @@
       <a href="topicSelection.html">Get Started</a>
     </div>
   </div>
-</head>
-<body>
 
-  <main class="container">
-    <h1>Explore Your Ideas</h1>
-    <form class="input-form">
-      <label for="category1">Category 1</label>
-      <input type="text" id="category1" placeholder="Enter topic 1" />
-
-      <label for="category2">Category 2</label>
-      <input type="text" id="category2" placeholder="Enter topic 2" />
-
-      <label for="timeframe">Timeframe (Results will be between this date and today)</label>
-      <input type="date" id="date"/>
-
-      <button type="submit" class="search-btn">Search</button>
-    </form>
+  <main class="profile-container">
+    <h1>Your Profile</h1>
+    <div class="profile-info">
+      <p><strong>Username:</strong> <span id="username"></span></p>
+      <p><strong>Password:</strong> <span id="password"></span></p>
+    </div>
   </main>
+
   <script>
-  document.querySelector('.input-form').addEventListener('submit', function (e) {
-    e.preventDefault();
+    const username = localStorage.getItem('username') || 'guest@example.com';
+    const password = localStorage.getItem('password') || '********';
 
-    const topic1 = document.getElementById('category1').value;
-    const topic2 = document.getElementById('category2').value;
-    const timeframe = document.getElementById('date').value;
-
-    localStorage.setItem('topic1', topic1);
-    localStorage.setItem('topic2', topic2);
-    localStorage.setItem('timeframe', timeframe);
-
-    window.location.href = 'resultsPage.html';
-  });
-</script>
+    document.getElementById('username').textContent = username;
+    document.getElementById('password').textContent = password;
+  </script>
 
 </body>
 </html>
-

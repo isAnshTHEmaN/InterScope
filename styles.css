@@ -32,7 +32,7 @@ nav, .navbar-container {
 }
 
 .navigation a {
-    font-family: 'Verdana'
+    font-family: 'Breuer'
     color: #8ab4f8;
     text-decoration: none;
     font-size: 32px;
@@ -167,7 +167,7 @@ nav, .navbar-container {
 }
 
 .description-text h3 {
-  font-family: 'Six Caps', sans-serif;
+  font-family: 'Classic Grotesque', sans-serif;
   font-size: 48px;
   letter-spacing: 2px;
   margin-bottom: 40px;

@@ -217,6 +217,14 @@ nav, .navbar-container {
   cursor: pointer;
 }
 
+.accordion-header span,
+.accordion-header button {
+  color: #8ab4f8;
+  background: none; 
+  border: none; 
+}
+
+
 .accordion-body {
   display: none;
   padding: 1rem;

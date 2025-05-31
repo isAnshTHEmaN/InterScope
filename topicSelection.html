@@ -87,5 +87,37 @@
       window.location.href = 'resultsPage.html';
     });
   </script>
+<script>
+  document.querySelector('.input-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const topic1 = document.getElementById('category1').value;
+    const topic2 = document.getElementById('category2').value;
+    const timeframe = document.getElementById('date').value; // already a string in YYYY-MM-DD
+
+    const requestData = {
+      topicOne: topic1,
+      topicTwo: topic2,
+      timeFrame: timeframe
+    };
+
+    fetch('http://104.198.68.208:8080/generateIdeas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      localStorage.setItem('results', JSON.stringify(data));
+      window.location.href = 'resultsPage.html';
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+</script>
+
 </body>
 </html>

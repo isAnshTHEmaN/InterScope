@@ -28,6 +28,11 @@
       <p><strong>Password:</strong> <span id="user-password">N/A</span></p>
     </div>
   </main>
+  
+  <div id="favorites-tab">
+  <h2>Favorites</h2>
+  <div id="favorites-list"></div>
+</div>
 
   <script>
     const STORAGE_KEY = 'interscope_isLoggedIn';
@@ -74,6 +79,32 @@
       document.getElementById('user-email').textContent = email;
       document.getElementById('user-password').textContent = password;
     }
+
+     function loadFavorites() {
+    const favoritesList = document.getElementById('favorites-list');
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (favorites.length === 0) {
+      favoritesList.innerHTML = '<p>No favorites saved yet.</p>';
+      return;
+    }
+
+    favorites.forEach(fav => {
+      const favItem = document.createElement('div');
+      favItem.style.border = '1px solid #3b82f6';
+      favItem.style.borderRadius = '0.375rem';
+      favItem.style.padding = '1rem';
+      favItem.style.marginBottom = '1rem';
+      favItem.innerHTML = `<h3>${fav.title}</h3>
+                           <p><strong>Keywords:</strong> ${fav.keyword1}, ${fav.keyword2}</p>
+                           <p>${fav.description}</p>
+                           <p><strong>Hypothesis:</strong> ${fav.hypothesis}</p>
+                           <p><strong>Procedure:</strong> ${fav.procedure}</p>`;
+      favoritesList.appendChild(favItem);
+    });
+  }
+
+  loadFavorites();
   </script>
 </body>
 </html>

@@ -166,4 +166,25 @@
         container.appendChild(item);
       });
 
-      document.getElementById('back').style.display = currentIndex === 0
+      document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
+      document.getElementById('next').style.display = (currentIndex + ideasPerPage) >= ideas.length ? 'none' : 'inline-block';
+    }
+
+    document.getElementById('back').addEventListener('click', () => {
+      if (currentIndex - ideasPerPage >= 0) {
+        currentIndex -= ideasPerPage;
+        displayIdeas();
+      }
+    });
+
+    document.getElementById('next').addEventListener('click', () => {
+      if (currentIndex + ideasPerPage < ideas.length) {
+        currentIndex += ideasPerPage;
+        displayIdeas();
+      }
+    });
+
+    displayIdeas();
+  </script>
+</body>
+</html>

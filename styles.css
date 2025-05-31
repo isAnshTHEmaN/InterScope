@@ -6,7 +6,7 @@ body {
 }
 
 header, .header {
-  background-color: #2f2f2f; /* dark grey */
+  background-color: black;
   border-bottom: 1px solid #1e2436;
   padding: 1rem 2rem;
   display: flex;
@@ -18,8 +18,9 @@ header, .header {
   max-height: 100px;
 }
 
+
 nav, .navbar-container {
-    background-color: #2f2f2f;
+    background-color: #000000;
     padding: 10px 0;
 }
 

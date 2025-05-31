@@ -1,50 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InterScope - Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Six+Caps&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InterScope - Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Six+Caps&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 
-    <script>
-        function startButton(event) {
-            event.preventDefault();
-            window.location.href = "topicSelection.html";
-        }
-
-        let isLoggedIn = false;
-
-        function updateAuthLink() {
-            const authLink = document.getElementById('auth-link');
-            const profileLink = document.getElementById('profile-link');
-
-            authLink.textContent = isLoggedIn ? 'Log Out' : 'Log In';
-            profileLink.style.display = isLoggedIn ? 'inline' : 'none';
-
-            authLink.onclick = function(e) {
-                e.preventDefault();
-                if (isLoggedIn) {
-                    isLoggedIn = false;
-                    alert('Logged out');
-                    updateAuthLink();
-                } else {
-                    window.location.href = 'login.html';
-                }
-            };
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            updateAuthLink();
-        });
-    </script>
+  <script>
+    function startButton(event) {
+      event.preventDefault();
+      window.location.href = "topicSelection.html";
+    }
+  </script>
 </head>
 <body>
+
   <div class="header">
-    <img src="interscope_logo.jpg" alt="InterScope Logo">
+    <img src="interscope_logo.jpg" alt="InterScope Logo" />
   </div>
+
   <div class="navbar-container">
     <div class="navigation">
       <a href="index.html">Home</a>
@@ -54,10 +31,50 @@
       <a href="#" id="auth-link">Log In</a>
     </div>
   </div>
+
   <div class="description-text">
-      <h3>InterScope: your favorite research assistant.</h3>
-      <h4>Uncover insights and conduct research with the power of InterScope. Enter topics to explore related abstracts and methodologies.</h4>
-      <button onclick="startButton(event)" type="button" class="custom-submit">Begin</button>
+    <h3>InterScope: your favorite research assistant.</h3>
+    <h4>Uncover insights and conduct research with the power of InterScope. Enter topics to explore related abstracts and methodologies.</h4>
+    <button onclick="startButton(event)" type="button" class="custom-submit">Begin</button>
   </div>
+
+  <script>
+    const STORAGE_KEY = 'interscope_isLoggedIn';
+
+    function getLoginState() {
+      return localStorage.getItem(STORAGE_KEY) === 'true';
+    }
+
+    function setLoginState(state) {
+      localStorage.setItem(STORAGE_KEY, state);
+    }
+
+    let isLoggedIn = getLoginState();
+
+    function updateAuthLink() {
+      const authLink = document.getElementById('auth-link');
+      const profileLink = document.getElementById('profile-link');
+
+      authLink.textContent = isLoggedIn ? 'Log Out' : 'Log In';
+      profileLink.style.display = isLoggedIn ? 'inline' : 'none';
+
+      authLink.onclick = function(e) {
+        e.preventDefault();
+        if (isLoggedIn) {
+          isLoggedIn = false;
+          setLoginState(false);
+          alert('Logged out');
+          updateAuthLink();
+        } else {
+          window.location.href = 'login.html';
+        }
+      };
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateAuthLink();
+    });
+  </script>
+
 </body>
 </html>

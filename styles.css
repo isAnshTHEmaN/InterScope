@@ -175,8 +175,8 @@ nav, .navbar-container {
 
 .description-text p {
   font-family: 'Times New Roman', sans-serif;
-  font-size: 24px;
-  letter-spacing: 2px;
+  font-size: 16px;
+  letter-spacing: 1px;
   margin-bottom: 40px;
   color: #8ab4f8;
 }

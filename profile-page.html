@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>InterScope - Profile</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <div class="header">
-    <img src="interscope_logo.jpg" alt="InterScope Logo">
+    <img src="interscope_logo.jpg" alt="InterScope Logo" />
   </div>
 
   <div class="navbar-container">
@@ -17,26 +15,59 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="topicSelection.html">Get Started</a>
+      <a href="profile-page.html" id="profile-link" style="display: none;">Profile</a>
+      <a href="#" id="auth-link">Log In</a>
     </div>
   </div>
 
-  <main class="profile-container">
-    <h1>Your Profile</h1>
-    <div class="profile-info">
-      <p><strong>Username:</strong> <span id="username"></span></p>
-      <p><strong>Password:</strong> <span id="password"></span></p>
+  <main class="container">
+    <h1>User Profile</h1>
+    <div id="profile-info">
+      <p><strong>Name:</strong> <span id="user-name">Guest</span></p>
+      <p><strong>Email:</strong> <span id="user-email">N/A</span></p>
     </div>
   </main>
 
   <script>
-    // For demo purposes, this grabs from localStorage (simulate login/signup logic)
-    const username = localStorage.getItem('username') || 'guest@example.com';
-    const password = localStorage.getItem('password') || '********';
+    const STORAGE_KEY = 'interscope_isLoggedIn';
 
-    document.getElementById('username').textContent = username;
-    document.getElementById('password').textContent = password;
+    function getLoginState() {
+      return localStorage.getItem(STORAGE_KEY) === 'true';
+    }
+
+    function setLoginState(state) {
+      localStorage.setItem(STORAGE_KEY, state);
+    }
+
+    let isLoggedIn = getLoginState();
+
+    function updateAuthLink() {
+      const authLink = document.getElementById('auth-link');
+      const profileLink = document.getElementById('profile-link');
+
+      authLink.textContent = isLoggedIn ? 'Log Out' : 'Log In';
+      profileLink.style.display = isLoggedIn ? 'inline' : 'none';
+
+      authLink.onclick = function(e) {
+        e.preventDefault();
+        if (isLoggedIn) {
+          isLoggedIn = false;
+          setLoginState(false);
+          alert('Logged out');
+          updateAuthLink();
+          window.location.href = "login.html";
+        } else {
+          window.location.href = "login.html";
+        }
+      };
+    }
+
+    updateAuthLink();
+
+    if (isLoggedIn) {
+      document.getElementById('user-name').textContent = "John Doe";
+      document.getElementById('user-email').textContent = "john.doe@example.com";
+    }
   </script>
-
 </body>
 </html>
-

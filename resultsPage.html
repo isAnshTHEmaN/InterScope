@@ -12,7 +12,10 @@
 
     <div class="container">
         <div id="ideas-container" class="accordion"></div>
-        <button id="regenerate" class="regen-btn">Re-generate</button>
+        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+            <button id="back" class="regen-btn">Back</button>
+            <button id="next" class="regen-btn">Next</button>
+        </div>
     </div>
 
     <script>
@@ -47,7 +50,7 @@
                 return;
             }
 
-            slice.forEach((idea, idx) => {
+            slice.forEach((idea) => {
                 const item = document.createElement('div');
                 item.className = 'accordion-item';
 
@@ -61,8 +64,8 @@
                 const body = document.createElement('div');
                 body.className = 'accordion-body';
                 body.innerHTML = `<div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
-                                 <p>${idea.description}</p>
-                                 <p class="idea-procedure">${idea.procedure}</p>`;
+                                 <p style="font-size: 1.2rem;">${idea.description}</p>
+                                 <p style="font-size: 0.9rem;"><strong>Procedure:</strong> ${idea.procedure}</p>`;
 
                 item.appendChild(header);
                 item.appendChild(body);
@@ -70,8 +73,13 @@
             });
         }
 
-        document.getElementById('regenerate').addEventListener('click', () => {
+        document.getElementById('next').addEventListener('click', () => {
             currentIndex += ideasPerPage;
+            displayIdeas();
+        });
+
+        document.getElementById('back').addEventListener('click', () => {
+            currentIndex = Math.max(0, currentIndex - ideasPerPage);
             displayIdeas();
         });
 

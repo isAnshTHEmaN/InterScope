@@ -285,3 +285,26 @@ nav, .navbar-container {
   margin: 0.75rem 0;
 }
 
+.favorites-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #1a1a1a;
+  border: 2px solid #3b82f6;
+  border-radius: 0.75rem;
+  color: #8ab4f8;
+  text-align: center;
+}
+
+.favorites-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.favorite-item {
+  border: 1px solid #3b82f6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}

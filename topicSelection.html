@@ -84,7 +84,6 @@
       localStorage.setItem('topic2', topic2);
       localStorage.setItem('timeframe', timeframe);
 
-      window.location.href = 'resultsPage.html';
     });
   </script>
 <script>
@@ -93,7 +92,7 @@
 
     const topic1 = document.getElementById('category1').value;
     const topic2 = document.getElementById('category2').value;
-    const timeframe = document.getElementById('date').value; // already a string in YYYY-MM-DD
+    const timeframe = document.getElementById('date').value; 
 
     const requestData = {
       topicOne: topic1,

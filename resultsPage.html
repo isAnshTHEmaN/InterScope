@@ -51,7 +51,7 @@
         <div class="topics-info">
             <p><strong>Topic 1:</strong> <span id="topic1">N/A</span></p>
             <p><strong>Topic 2:</strong> <span id="topic2">N/A</span></p>
-            <p><strong>Timeframe:</strong> <span id="timeframe">N/A</span></p>
+            <p id="current-date"><strong>Timeframe:</strong> <span id="timeframe">N/A</span> - </p>
         </div>
         <div id="ideas-container" class="accordion"></div>
         <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
@@ -61,6 +61,9 @@
     </div>
 
     <script>
+        const today = new Date();
+        document.getElementById("current-date").textContent += dateString;
+        
         const topic1 = localStorage.getItem('topic1') || 'N/A';
         const topic2 = localStorage.getItem('topic2') || 'N/A';
         const timeframe = localStorage.getItem('timeframe') || 'N/A';

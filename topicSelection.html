@@ -16,12 +16,6 @@
       <a href="topicSelection.html">Get Started</a>
     </div>
   </div>
-  <script>
-    function searchButton(event) {
-      event.preventDefault();
-      window.location.href = "resultsPage.html";
-        }
-  </script>
 </head>
 <body>
 
@@ -37,9 +31,25 @@
       <label for="timeframe">Timeframe (Results will be between this date and today)</label>
       <input type="date" id="date"/>
 
-      <button type="submit" onclick="searchButton(event)" class="search-btn">Search</button>
+      <button type="submit" class="search-btn">Search</button>
     </form>
   </main>
+  <script>
+  document.querySelector('.input-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const topic1 = document.getElementById('category1').value;
+    const topic2 = document.getElementById('category2').value;
+    const timeframe = document.getElementById('date').value;
+
+    localStorage.setItem('topic1', topic1);
+    localStorage.setItem('topic2', topic2);
+    localStorage.setItem('timeframe', timeframe);
+
+    window.location.href = 'ideasDisplay.html';
+  });
+</script>
+
 </body>
 </html>
 

@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <title>Project Ideas Display</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .accordion-item.active .arrow {
+            transform: rotate(90deg);
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -45,10 +58,6 @@
             
             const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
             
-            if (slice.length === 0) {
-                container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
-                return;
-            }
 
             slice.forEach((idea) => {
                 const item = document.createElement('div');
@@ -56,7 +65,7 @@
 
                 const header = document.createElement('button');
                 header.className = 'accordion-header';
-                header.textContent = idea.title;
+                header.innerHTML = `<span>${idea.title}</span><span class="arrow">▶</span>`;
                 header.addEventListener('click', () => {
                     item.classList.toggle('active');
                 });
@@ -64,13 +73,16 @@
                 const body = document.createElement('div');
                 body.className = 'accordion-body';
                 body.innerHTML = `<div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
-                                 <p style="font-size: 1.2rem;">${idea.description}</p>
+                                 <p style="font-size: 1.4rem;">${idea.description}</p>
                                  <p style="font-size: 0.9rem;"><strong>Procedure:</strong> ${idea.procedure}</p>`;
 
                 item.appendChild(header);
                 item.appendChild(body);
                 container.appendChild(item);
             });
+
+            document.getElementById('back').style.display = currentIndex === 0 ? 'none' : 'inline-block';
+            document.getElementById('next').style.display = (currentIndex + ideasPerPage) >= ideas.length ? 'none' : 'inline-block';
         }
 
         document.getElementById('next').addEventListener('click', () => {

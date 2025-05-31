@@ -75,6 +75,7 @@
                 description: "This project proposes the design and fabrication of artificial mycorrhizal networks—biocompatible polymer‐based nanofiber meshes that emulate the nutrient and water transport functions of fungal hyphae—to enhance plant resilience under drought and low‐fertility conditions.",
                 keyword1: "artificial",
                 keyword2: "sustainable",
+                hypothesis: "Artificial networks mimicking mycorrhizal structures can improve water and nutrient uptake in crop roots, reducing fertilizer and irrigation needs and promoting sustainable yields in marginal soils.",
                 procedure: "1. Material Synthesis: Develop electrospun nanofiber mats from biodegradable polymers (e.g., polylactic acid, chitosan) functionalized with phosphatase and aquaporin‐like proteins. 2. Network Assembly: Pattern fibers into branching architectures using 3D printing to approximate fungal hyphal networks. 3. Greenhouse Trials: Embed artificial networks alongside seedling roots of model crops (e.g., wheat, maize) in controlled soil microcosms under varied moisture and nutrient regimes. 4. Tracer Studies: Use isotopically labeled phosphorus and deuterated water to quantify transport rates through artificial versus native mycorrhizal networks. 5. Imaging & Analysis: Employ confocal microscopy and X‐ray tomography to visualize root–network interfacing; measure plant biomass, water‐use efficiency, and soil nutrient depletion over growth cycles. 6. Life‐Cycle Assessment: Evaluate biodegradation and ecological impact of network materials in field soil samples over six months post‐harvest."
             },
             {
@@ -82,6 +83,7 @@
                 description: "This research aims to apply swarm intelligence algorithms to coordinated fleets of autonomous aerial drones for targeted seed dispersal and real‐time environmental monitoring in deforested or degraded landscapes.",
                 keyword1: "intelligence",
                 keyword2: "environmental",
+                hypothesis: "Drones guided by bioinspired swarm intelligence will achieve higher reforestation success rates and more efficient monitoring of environmental variables than single‐agent or centrally controlled systems.",
                 procedure: "1. Algorithm Development: Design and implement decentralized swarm behaviors (e.g., pheromone‐inspired virtual markers, leader‐follower dynamics) enabling drones to self‐organize, avoid collisions, and allocate seeding tasks adaptively. 2. Sensor Integration: Equip each drone with multispectral cameras, LiDAR, and soil‐moisture probes for on‐the‐fly assessment of vegetation canopy, topography, and soil conditions. 3. Simulation Testing: Validate swarm algorithms in virtual environments (e.g., Gazebo, ROS) with digital twins of target terrains, optimizing parameters for seed drop precision and coverage. 4. Field Deployment: Conduct pilot trials in a 1‐hectare deforested site, releasing swarms of 20–30 drones programmed to identify optimal planting zones, deposit biodegradable seed capsules, and map emergent sapling growth. 5. Monitoring & Evaluation: Use repeat drone flights and ground surveys over 12 months to assess seed germination rates, biomass accumulation, species diversity, and soil quality improvements. 6. Comparative Analysis: Benchmark performance metrics (area replanted per flight hour, survival rates, energy consumption) against traditional manual planting and centrally controlled drone experiments."
             }
         ];
@@ -117,6 +119,7 @@
                 body.className = 'accordion-body';
                 body.innerHTML = `<div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
                                  <p style="font-size: 1.4rem;">${idea.description}</p>
+                                 <p style="font-size: 1.2rem;"><strong>Hypothesis:</strong> ${idea.hypothesis}</p>;
                                  <p style="font-size: 0.9rem;"><strong>Procedure:</strong> ${idea.procedure}</p>`;
 
                 item.appendChild(header);

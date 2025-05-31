@@ -81,6 +81,9 @@
         if (isLoggedIn) {
           isLoggedIn = false;
           setLoginState(false);
+          localStorage.removeItem('userFullName');
+          localStorage.removeItem('userEmail');
+          localStorage.removeItem('userPassword');
           alert('Logged out');
           updateAuthLink();
           switchForm('login');
@@ -93,21 +96,39 @@
     }
 
     updateAuthLink();
-
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      isLoggedIn = true;
-      setLoginState(true);
-      alert("Logged in (placeholder)");
-      updateAuthLink();
+      const emailInput = e.target.querySelector('input[type="email"]').value.trim();
+      const passwordInput = e.target.querySelector('input[type="password"]').value;
+
+      const storedEmail = localStorage.getItem('userEmail');
+      const storedPassword = localStorage.getItem('userPassword');
+
+      if (emailInput === storedEmail && passwordInput === storedPassword) {
+        isLoggedIn = true;
+        setLoginState(true);
+        alert("Logged in successfully!");
+        updateAuthLink();
+      } else {
+        alert("Incorrect email or password.");
+      }
     });
 
     document.getElementById('signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
+      const fullName = e.target.querySelector('input[type="text"]').value.trim();
+      const email = e.target.querySelector('input[type="email"]').value.trim();
+      const password = e.target.querySelector('input[type="password"]').value;
+
+      localStorage.setItem('userFullName', fullName);
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userPassword', password);
+
       isLoggedIn = true;
       setLoginState(true);
-      alert("Account created (placeholder)");
+      alert("Account created successfully!");
       updateAuthLink();
+      switchForm('login');
     });
   </script>
 

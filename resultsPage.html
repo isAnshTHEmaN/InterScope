@@ -1,53 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Research Results</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <title>Project Ideas Display</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="container">
-    <h2>Shared Research Keywords</h2>
-    <div class="keywords">
-      <span>Machine Learning</span>
-      <span>Data Analysis</span>
-      <span>Genomics</span>
-      <span>Bioinformatics</span>
-      <span>Deep Learning</span>
+    <header class="header">
+        <h1>Project Ideas</h1>
+    </header>
+
+    <div class="container">
+        <div id="ideas-container" class="accordion"></div>
+        <button id="regenerate" class="regen-btn">Re-generate</button>
     </div>
 
-    <h2>Example Research Ideas</h2>
-    <div class="accordion">
-      <div class="accordion-item active">
-        <button class="accordion-header">AI-Driven Genomic Analysis</button>
-        <div class="accordion-body">
-          This research idea explores the application of AI techniques to analyze genomic data, identify patterns, and predict outcomes related to disease, treatment response, and more.
-        </div>
-      </div>
+    <script>
+        const ideas = [
+            {
+                title: "Engineering Artificial Mycorrhizal Networks for Sustainable Agriculture",
+                description: "This project proposes the design and fabrication of artificial mycorrhizal networks—biocompatible polymer‐based nanofiber meshes that emulate the nutrient and water transport functions of fungal hyphae—to enhance plant resilience under drought and low‐fertility conditions.",
+                keyword1: "artificial",
+                keyword2: "sustainable",
+                procedure: "1. Material Synthesis: Develop electrospun nanofiber mats from biodegradable polymers (e.g., polylactic acid, chitosan) functionalized with phosphatase and aquaporin‐like proteins. 2. Network Assembly: Pattern fibers into branching architectures using 3D printing to approximate fungal hyphal networks. 3. Greenhouse Trials: Embed artificial networks alongside seedling roots of model crops (e.g., wheat, maize) in controlled soil microcosms under varied moisture and nutrient regimes. 4. Tracer Studies: Use isotopically labeled phosphorus and deuterated water to quantify transport rates through artificial versus native mycorrhizal networks. 5. Imaging & Analysis: Employ confocal microscopy and X‐ray tomography to visualize root–network interfacing; measure plant biomass, water‐use efficiency, and soil nutrient depletion over growth cycles. 6. Life‐Cycle Assessment: Evaluate biodegradation and ecological impact of network materials in field soil samples over six months post‐harvest."
+            },
+            {
+                title: "Swarm Intelligence–Driven Drone Reforestation for Environmental Restoration",
+                description: "This research aims to apply swarm intelligence algorithms to coordinated fleets of autonomous aerial drones for targeted seed dispersal and real‐time environmental monitoring in deforested or degraded landscapes.",
+                keyword1: "intelligence",
+                keyword2: "environmental",
+                procedure: "1. Algorithm Development: Design and implement decentralized swarm behaviors (e.g., pheromone‐inspired virtual markers, leader‐follower dynamics) enabling drones to self‐organize, avoid collisions, and allocate seeding tasks adaptively. 2. Sensor Integration: Equip each drone with multispectral cameras, LiDAR, and soil‐moisture probes for on‐the‐fly assessment of vegetation canopy, topography, and soil conditions. 3. Simulation Testing: Validate swarm algorithms in virtual environments (e.g., Gazebo, ROS) with digital twins of target terrains, optimizing parameters for seed drop precision and coverage. 4. Field Deployment: Conduct pilot trials in a 1‐hectare deforested site, releasing swarms of 20–30 drones programmed to identify optimal planting zones, deposit biodegradable seed capsules, and map emergent sapling growth. 5. Monitoring & Evaluation: Use repeat drone flights and ground surveys over 12 months to assess seed germination rates, biomass accumulation, species diversity, and soil quality improvements. 6. Comparative Analysis: Benchmark performance metrics (area replanted per flight hour, survival rates, energy consumption) against traditional manual planting and centrally controlled drone experiments."
+            }
+        ];
 
-      <div class="accordion-item">
-        <button class="accordion-header">Machine Learning in Bioinformatics</button>
-        <div class="accordion-body">[Details go here]</div>
-      </div>
+        let currentIndex = 0;
+        const ideasPerPage = 10;
 
-      <div class="accordion-item">
-        <button class="accordion-header">Deep Learning for Drug Discovery</button>
-        <div class="accordion-body">[Details go here]</div>
-      </div>
-    </div>
+        function displayIdeas() {
+            const container = document.getElementById('ideas-container');
+            container.innerHTML = '';
+            
+            const slice = ideas.slice(currentIndex, currentIndex + ideasPerPage);
+            
+            if (slice.length === 0) {
+                container.innerHTML = '<p>This is all that we could find, try searching for something new.</p>';
+                return;
+            }
 
-    <button class="regen-btn">Re-Generate</button>
-  </main>
+            slice.forEach((idea, idx) => {
+                const item = document.createElement('div');
+                item.className = 'accordion-item';
 
-  <script>
-    // Accordion behavior
-    document.querySelectorAll('.accordion-header').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        item.classList.toggle('active');
-      });
-    });
-  </script>
+                const header = document.createElement('button');
+                header.className = 'accordion-header';
+                header.textContent = idea.title;
+                header.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+
+                const body = document.createElement('div');
+                body.className = 'accordion-body';
+                body.innerHTML = `<div class="keywords"><span>${idea.keyword1}</span> <span>${idea.keyword2}</span></div>
+                                 <p>${idea.description}</p>
+                                 <p class="idea-procedure">${idea.procedure}</p>`;
+
+                item.appendChild(header);
+                item.appendChild(body);
+                container.appendChild(item);
+            });
+        }
+
+        document.getElementById('regenerate').addEventListener('click', () => {
+            currentIndex += ideasPerPage;
+            displayIdeas();
+        });
+
+        displayIdeas();
+    </script>
 </body>
 </html>

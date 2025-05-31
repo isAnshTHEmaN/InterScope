@@ -1,13 +1,13 @@
 body {
-  font-family: 'Radio Canada Big', Arial, sans-serif;
+  font-family: 'Nunito Sans Bold', Lato, sans-serif;
   margin: 0;
-  background-color: #f9fafb;
-  color: #111827;
+  background-color: #000000;
+  color: #FFFFFF;
 }
 
 header, .header {
-  background-color: white;
-  border-bottom: 1px solid #e5e7eb;
+  background-color: black;
+  border-bottom: 1px solid #1e2436;
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@ header, .header {
 }
 
 nav, .navbar-container {
-    background-color: #333;
+    background-color: #000000;
     padding: 10px 0;
 }
 

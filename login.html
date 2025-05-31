@@ -1,58 +1,115 @@
-<script>
-  // Use localStorage key
-  const STORAGE_KEY = 'interscope_isLoggedIn';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InterScope - Login / Signup</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-  function getLoginState() {
-    return localStorage.getItem(STORAGE_KEY) === 'true';
-  }
+  <div class="header">
+    <img src="interscope_logo.jpg" alt="InterScope Logo" />
+  </div>
 
-  function setLoginState(state) {
-    localStorage.setItem(STORAGE_KEY, state);
-  }
+  <div class="navbar-container">
+    <div class="navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="topicSelection.html">Get Started</a>
+      <a href="profile-page.html" id="profile-link" style="display: none;">Profile</a>
+      <a href="#" id="auth-link">Log In</a>
+    </div>
+  </div>
 
-  let isLoggedIn = getLoginState();
+  <div class="main-content">
+    <div class="auth-container" id="login-box">
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Log In</button>
+      </form>
+      <div class="switch-auth">
+        Don't have an account?
+        <a href="#" onclick="switchForm('signup'); return false;">Sign Up</a>
+      </div>
+    </div>
 
-  function switchForm(formType) {
-    document.getElementById('login-box').style.display = formType === 'login' ? 'block' : 'none';
-    document.getElementById('signup-box').style.display = formType === 'signup' ? 'block' : 'none';
-  }
+    <div class="auth-container" id="signup-box" style="display: none;">
+      <h2>Sign Up</h2>
+      <form id="signup-form">
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Create Account</button>
+      </form>
+      <div class="switch-auth">
+        Already have an account?
+        <a href="#" onclick="switchForm('login'); return false;">Log In</a>
+      </div>
+    </div>
+  </div>
 
-  function updateAuthLink() {
-    const authLink = document.getElementById('auth-link');
-    const profileLink = document.getElementById('profile-link');
+  <script>
+    const STORAGE_KEY = 'interscope_isLoggedIn';
 
-    authLink.textContent = isLoggedIn ? 'Log Out' : 'Log In';
-    profileLink.style.display = isLoggedIn ? 'inline' : 'none';
+    function getLoginState() {
+      return localStorage.getItem(STORAGE_KEY) === 'true';
+    }
 
-    authLink.onclick = function(e) {
+    function setLoginState(state) {
+      localStorage.setItem(STORAGE_KEY, state);
+    }
+
+    let isLoggedIn = getLoginState();
+
+    function switchForm(formType) {
+      document.getElementById('login-box').style.display = formType === 'login' ? 'block' : 'none';
+      document.getElementById('signup-box').style.display = formType === 'signup' ? 'block' : 'none';
+    }
+
+    function updateAuthLink() {
+      const authLink = document.getElementById('auth-link');
+      const profileLink = document.getElementById('profile-link');
+
+      authLink.textContent = isLoggedIn ? 'Log Out' : 'Log In';
+      profileLink.style.display = isLoggedIn ? 'inline' : 'none';
+
+      authLink.onclick = function(e) {
+        e.preventDefault();
+        if (isLoggedIn) {
+          isLoggedIn = false;
+          setLoginState(false);
+          alert('Logged out');
+          updateAuthLink();
+          switchForm('login');
+          window.scrollTo(0,0);
+        } else {
+          switchForm('login');
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+      };
+    }
+
+    updateAuthLink();
+
+    document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      if (isLoggedIn) {
-        isLoggedIn = false;
-        setLoginState(false);
-        alert('Logged out');
-        updateAuthLink();
-      } else {
-        switchForm('login');
-        window.scrollTo(0, document.body.scrollHeight);
-      }
-    };
-  }
+      isLoggedIn = true;
+      setLoginState(true);
+      alert("Logged in (placeholder)");
+      updateAuthLink();
+    });
 
-  updateAuthLink();
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      isLoggedIn = true;
+      setLoginState(true);
+      alert("Account created (placeholder)");
+      updateAuthLink();
+    });
+  </script>
 
-  document.getElementById('login-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    isLoggedIn = true;
-    setLoginState(true);
-    alert("Logged in (placeholder)");
-    updateAuthLink();
-  });
-
-  document.getElementById('signup-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    isLoggedIn = true;
-    setLoginState(true);
-    alert("Account created (placeholder)");
-    updateAuthLink();
-  });
-</script>
+</body>
+</html>

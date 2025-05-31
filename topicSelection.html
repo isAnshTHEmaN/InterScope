@@ -4,19 +4,19 @@ topicSelection.html:1 Access to fetch at 'http://104.198.68.208:8080/generateIde
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InterScope - Search</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://storage.cloud.google.com/interscope/styles.css" />
 </head>
 <body>
   <div class="header">
-    <img src="interscope_logo.jpg" alt="InterScope Logo" />
+    <img src="https://storage.cloud.google.com/interscope/interscope_logo.jpg" alt="InterScope Logo" />
   </div>
 
   <div class="navbar-container">
     <div class="navigation">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="topicSelection.html">Get Started</a>
-      <a href="profile-page.html" id="profile-link" style="display: none;">Profile</a>
+      <a href="https://storage.cloud.google.com/interscope/index.html">Home</a>
+      <a href="https://storage.cloud.google.com/interscope/about.html">About</a>
+      <a href="https://storage.cloud.google.com/interscope/topicSelection.html">Get Started</a>
+      <a href="https://storage.cloud.google.com/interscope/profile-page.html" id="profile-link" style="display: none;">Profile</a>
       <a href="#" id="auth-link">Log In</a>
     </div>
   </div>
@@ -64,9 +64,9 @@ topicSelection.html:1 Access to fetch at 'http://104.198.68.208:8080/generateIde
           setLoginState(false);
           alert('Logged out');
           updateAuthLink();
-          window.location.href = "login.html";
+          window.location.href = "https://storage.cloud.google.com/interscope/login.html";
         } else {
-          window.location.href = "login.html";
+          window.location.href = "https://storage.cloud.google.com/interscope/login.html";
         }
       };
     }
@@ -84,7 +84,7 @@ topicSelection.html:1 Access to fetch at 'http://104.198.68.208:8080/generateIde
       localStorage.setItem('topic2', topic2);
       localStorage.setItem('timeframe', timeframe);
 
-      window.location.href = 'resultsPage.html';
+      window.location.href = 'https://storage.cloud.google.com/interscope/resultsPage.html';
     });
   </script>
 <script>
@@ -111,7 +111,7 @@ topicSelection.html:1 Access to fetch at 'http://104.198.68.208:8080/generateIde
     .then(response => response.json())
     .then(data => {
       localStorage.setItem('results', JSON.stringify(data));
-      window.location.href = 'resultsPage.html';
+      window.location.href = 'https://storage.cloud.google.com/interscope/resultsPage.html';
     })
     .catch(error => {
       console.error('Error:', error);

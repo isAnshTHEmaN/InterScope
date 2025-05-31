@@ -172,3 +172,11 @@ nav, .navbar-container {
   margin-bottom: 40px;
   color: #8ab4f8;
 }
+
+.description-text p {
+  font-family: 'Times New Roman', sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  color: #8ab4f8;
+}

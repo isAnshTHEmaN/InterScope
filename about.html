@@ -1,40 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InterScope - About</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Six+Caps&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InterScope - About</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Six+Caps&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 
-    <script>
-         function startButton(event) {
-            event.preventDefault();
-            window.location.href = "topicSelection.html";
-        }
-    </script>
+  <script>
+    function startButton(event) {
+      event.preventDefault();
+      window.location.href = "topicSelection.html";
+    }
+  </script>
 </head>
 <body>
   <div class="header">
-    <img src="interscope_logo.jpg" alt="InterScope Logo">
+    <img src="interscope_logo.jpg" alt="InterScope Logo" />
   </div>
+
   <div class="navbar-container">
     <div class="navigation">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="topicSelection.html">Get Started</a>
+      <a href="profile-page.html" id="profile-link" style="display: none;">Profile</a>
+      <a href="#" id="auth-link">Log In</a>
     </div>
   </div>
-<div class="description-text">
+
+  <div class="description-text">
     <h2>What is Interscope?</h2>
     <p>InterScope is an application that allows users to discover intriguing connections between two “unrelated” topics of the user’s choosing. Its primary utilization is for research and technical purposes, hypotheses, and methodologies for scientific experiments, allowing both professionals and students alike to delve further into niche research fields. InterScope is striving to develop a valuable exploration tool that will facilitate scientific breakthroughs and have a significant impact on researchers.</p>
     <h2>Our Purpose</h2>
     <p>According to data reported in 2021 from the National Center for Science and Engineering Statistics, approximately 47.2% of dissertation fields intersected 2 or more fields to lead to scientific breakthroughs. InterScope’s primary purpose is to spearhead these scientific breakthroughs by generating research topics merging 2 independent fields, such as “Bioinformatics” and “Artificial Intelligence”. We are reforming the way scientific research is approached and encouraging impact-based development globally. By combining two research interactions that have little to no prior published work, we are organizing a collective search for knowledge.</p>
     <h2>Why us?</h2>
-    <p>Our model is a highly specialized research model, utilizing current and up-to-date information from reputable scientific studies and journals. In contrast, ChatGPT and other models are restricted in the number of sources they can access, which renders them less credible. Using the research topics “Quantum Computing” and “Sustainability,” we conducted a comprehensive comparison of our model to ChatGPT to illustrate this distinction:
-</p>
+    <p>Our model is a highly specialized research model, utilizing current and up-to-date information from reputable scientific studies and journals. In contrast, ChatGPT and other models are restricted in the number of sources they can access, which renders them less credible. Using the research topics “Quantum Computing” and “Sustainability,” we conducted a comprehensive comparison of our model to ChatGPT to illustrate this distinction:</p>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'interscope_isLoggedIn';
+
+    function getLoginState() {
+      return localStorage.getItem(STORAGE_KEY) === 'true';
+    }
+
+    function setLoginState(state) {
+      localStorage.setItem(STORAGE_KEY, state);
+    }
+
+    let isLoggedIn = getLoginState();
+
+    function updateAuthLink() {
+      const authLink = document.getElementById('auth-link');
+      const profileLink = document.getElementById('profile-link');
+
+      authLink.textContent = isLoggedIn ? 'Log Out' : 'Log In';
+      profileLink.style.display = isLoggedIn ? 'inline' : 'none';
+
+      authLink.onclick = function(e) {
+        e.preventDefault();
+        if (isLoggedIn) {
+          isLoggedIn = false;
+          setLoginState(false);
+          alert('Logged out');
+          updateAuthLink();
+          window.location.href = "login.html";
+        } else {
+          window.location.href = "login.html";
+        }
+      };
+    }
+
+    updateAuthLink();
+  </script>
 </body>
-    
-  
+</html>

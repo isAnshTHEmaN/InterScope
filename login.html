@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>InterScope - Login / Signup</title>
   <link rel="stylesheet" href="styles.css" />
-  </head>
+</head>
 <body>
 
   <div class="header">
@@ -17,92 +17,79 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="topicSelection.html">Get Started</a>
-      <a href="login.html" id="auth-link">Log In</a>
-    </div>
-  </div>
-<div class="main-content">
-  <div class="auth-container" id="login-box">
-    <h2>Login</h2>
-    <form id="login-form">
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <button type="submit">Log In</button>
-    </form>
-    <div class="switch-auth">
-      Don't have an account?
-      <a href="#" onclick="switchForm('signup')">Sign Up</a>
+      <a href="#" id="auth-link">Log In</a>
     </div>
   </div>
 
+  <div class="main-content">
+    <div class="auth-container" id="login-box">
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Log In</button>
+      </form>
+      <div class="switch-auth">
+        Don't have an account?
+        <a href="#" onclick="switchForm('signup')">Sign Up</a>
+      </div>
+    </div>
 
-  <div class="auth-container" id="signup-box" style="display: none;">
-    <h2>Sign Up</h2>
-    <form id="signup-form">
-      <input type="text" placeholder="Full Name" required />
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <button type="submit">Create Account</button>
-    </form>
-    <div class="switch-auth">
-      Already have an account?
-      <a href="#" onclick="switchForm('login')">Log In</a>
+    <div class="auth-container" id="signup-box" style="display: none;">
+      <h2>Sign Up</h2>
+      <form id="signup-form">
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Create Account</button>
+      </form>
+      <div class="switch-auth">
+        Already have an account?
+        <a href="#" onclick="switchForm('login')">Log In</a>
+      </div>
     </div>
   </div>
-</div>
+
   <script>
+    let isLoggedIn = false;
+
     function switchForm(formType) {
       document.getElementById('login-box').style.display = formType === 'login' ? 'block' : 'none';
       document.getElementById('signup-box').style.display = formType === 'signup' ? 'block' : 'none';
     }
 
+    function updateAuthLink() {
+      const authLink = document.getElementById('auth-link');
+      authLink.textContent = isLoggedIn ? 'Log Out' : 'Log In';
+      authLink.onclick = function(e) {
+        e.preventDefault();
+        if (isLoggedIn) {
+          isLoggedIn = false;
+          alert('Logged out');
+          updateAuthLink();
+        } else {
+          switchForm('login');
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+      };
+    }
+
+    updateAuthLink();
+
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
-  
+      isLoggedIn = true;
       alert("Logged in (placeholder)");
+      updateAuthLink();
     });
 
     document.getElementById('signup-form').addEventListener('submit', function(e) {
       e.preventDefault();
- 
+      isLoggedIn = true;
       alert("Account created (placeholder)");
-    });
-
-    <script>
-  let isLoggedIn = false; 
-
- function updateAuthLink() {
-  const authLink = document.getElementById('auth-link');
-  authLink.onclick = function(e) {
-    e.preventDefault();
-    if (isLoggedIn) {
-      isLoggedIn = false;
-      alert('Logged out');
       updateAuthLink();
-    } else {
-      switchForm('login');
-      window.scrollTo(0, document.body.scrollHeight);
-    }
-  };
-
-  updateAuthLink();
-
-  document.getElementById('login-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    isLoggedIn = true;
-    alert("Logged in (placeholder)");
-    updateAuthLink();
-  });
-
-  document.getElementById('signup-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    isLoggedIn = true;
-    alert("Account created (placeholder)");
-    updateAuthLink();
-  });
-</script>
-
+    });
   </script>
 
 </body>
 </html>
-

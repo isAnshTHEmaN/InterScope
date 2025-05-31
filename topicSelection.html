@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+topicSelection.html:1 Access to fetch at 'http://104.198.68.208:8080/generateIdeas' from origin 'null' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -84,6 +84,7 @@
       localStorage.setItem('topic2', topic2);
       localStorage.setItem('timeframe', timeframe);
 
+      window.location.href = 'resultsPage.html';
     });
   </script>
 <script>
@@ -109,8 +110,8 @@
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       localStorage.setItem('results', JSON.stringify(data));
+      window.location.href = 'resultsPage.html';
     })
     .catch(error => {
       console.error('Error:', error);

@@ -16,6 +16,12 @@
       <a href="topicSelection.html">Get Started</a>
     </div>
   </div>
+  <script>
+    function searchButton(event) {
+      event.preventDefault();
+      window.location.href = "resultsPage.html";
+        }
+  </script>
 </head>
 <body>
 
@@ -31,7 +37,7 @@
       <label for="timeframe">Timeframe (Results will be between this date and today)</label>
       <input type="date" id="date"/>
 
-      <button type="submit" class="search-btn">Search</button>
+      <button type="submit" onclick="searchButton(event)" class="search-btn">Search</button>
     </form>
   </main>
 </body>
